@@ -1,1 +1,30 @@
-.idea/
+# Dependencies
+node_modules
+
+# Build outputs
+build/
+.cache/
+
+# Prisma generated client
+/generated/prisma
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Secrets / certs
+*.pem
+*.zip
+
+# Editors
+.idea
+.claude
+
+# Test coverage
+coverage/
+
+# OS / misc
+.DS_Store
+*.log
+*.bak

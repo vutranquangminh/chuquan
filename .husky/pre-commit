@@ -1,0 +1,17 @@
+echo "Checking types..."
+# 1. Run Type-Check on the whole project
+yarn typecheck
+if [ $? -ne 0 ]; then
+  echo "❌ Type-check failed. Please fix the errors before committing."
+  exit 1
+fi
+
+echo "Running validation on staged files..."
+# 2. Run lint-staged to run ESLint on staged files
+npx lint-staged
+
+# Exit with error if ESLint fails
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint check failed. Please fix the errors before committing."
+  exit 1
+fi

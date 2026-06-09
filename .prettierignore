@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+.yarn
+
+# Build outputs
+build
+dist
+.cache
+public/build
+
+# Generated files
+.prisma
+prisma/migrations
+
+# Environment files
+.env
+.env.*
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+
+# Misc
+coverage
+*.log
+.DS_Store
