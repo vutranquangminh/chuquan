@@ -14,3 +14,55 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Company {
+  id          String  @id @default(cuid())
+  name        String
+  taxCode     String? @unique // Mã số thuế
+  address     String?
+  phone       String?
+  bankAccount String? // Số tài khoản — free text
+
+  buyerContracts  Contract[] @relation("BuyerCompany")
+  sellerContracts Contract[] @relation("SellerCompany")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Contract {
+  id     String @id @default(cuid())
+  number String @unique // Số HĐ
+
+  buyerId  String
+  buyer    Company @relation("BuyerCompany", fields: [buyerId], references: [id])
+  sellerId String
+  seller   Company @relation("SellerCompany", fields: [sellerId], references: [id])
+
+  totalAmount        Decimal @db.Decimal(18, 0)
+  totalAmountInWords String?
+  vatIncluded        Boolean @default(true)
+
+  items ContractItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([buyerId])
+  @@index([sellerId])
+}
+
+model ContractItem {
+  id         String   @id @default(cuid())
+  contractId String
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  name       String
+  unit       String
+  quantity   Int
+  unitPrice  Decimal  @db.Decimal(18, 0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([contractId])
+}
