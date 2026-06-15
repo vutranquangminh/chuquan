@@ -37,6 +37,15 @@ export default [
   {
     files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.mjs'],
   },
+  // Global settings so the React version reaches plugin:react/recommended
+  // (added via FlatCompat), which otherwise warns it is not specified.
+  {
+    settings: {
+      react: {
+        version: '19.0',
+      },
+    },
+  },
   ...fixupConfigRules(
     compat.extends(
       'plugin:react/recommended',
