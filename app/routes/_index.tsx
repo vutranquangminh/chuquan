@@ -1,4 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
+import { Link } from '@remix-run/react';
 
 export const meta: MetaFunction = () => [
   { title: 'chuquan' },
@@ -15,6 +16,9 @@ export default function Index() {
       <p className="text-muted-foreground">
         Remix + Vite + Prisma + Tailwind scaffold is ready.
       </p>
+      <Link to="/companies" className="text-blue-600 underline">
+        Quản lý công ty
+      </Link>
     </main>
   );
 }
